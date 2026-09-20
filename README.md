@@ -6,6 +6,8 @@
   ### Premium Fitness Website — Bhagalpur, Bihar
   **A high-impact, conversion-focused digital experience built for Prem Fitness Gym.**
 
+  > 🌐 **Live Site:** https://mohitraj8503.github.io/Prem-Fitness-Gym/ — Custom domain removed. Default GitHub Pages URL is canonical.
+
   <p>
     <a href="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001"><img src="https://img.shields.io/badge/Google%20Rating-5.0%20%E2%98%85%20(49%20Reviews)-brightgreen?style=for-the-badge&logo=google" alt="Google Rating"/></a>
     <a href="https://www.instagram.com/premfitnessgym/"><img src="https://img.shields.io/badge/Instagram-@premfitnessgym-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/></a>
