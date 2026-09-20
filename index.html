@@ -725,11 +725,11 @@
     }
 
     // Build WhatsApp message
-    var msg = 'Hi! I am *' + name + '*.\n'
-            + 'My phone number is *' + phone + '*.\n'
+    var msg = 'Hi! I am ' + name + '.\n'
+            + 'My phone number is ' + phone + '.\n'
             + (message ? 'Message: ' + message + '\n' : '')
-            + 'I want to know more about *Prem Fitness Gym, Bhagalpur*.\n'
-            + 'Please get in touch. 🙏';
+            + 'I want to know more about Prem Fitness Gym, Bhagalpur.\n'
+            + 'Please get in touch.';
 
     var waUrl = 'https://wa.me/918051647464?text=' + encodeURIComponent(msg);
 

@@ -431,12 +431,12 @@
       }
 
       // Build WhatsApp message
-      var msg = 'Hi! I am *' + name + '*.\n'
-              + 'My phone number is *' + phone + '*.\n'
-              + 'I am from *' + address + '*.\n'
-              + (email ? 'My email is *' + email + '*.\n' : '')
-              + 'I want to join *Prem Fitness Gym, Bhagalpur* (Annual Membership - Rs.4,500/year).\n'
-              + 'Please confirm my registration. 🙏';
+      var msg = 'Hi! I am ' + name + '.\n'
+              + 'My phone number is ' + phone + '.\n'
+              + (email ? 'My email is ' + email + '.\n' : '')
+              + 'I am from ' + address + '.\n'
+              + 'I want to join Prem Fitness Gym, Bhagalpur (Annual Membership - Rs.4,500/year).\n'
+              + 'Please confirm my registration.';
 
       var waUrl = 'https://wa.me/918051647464?text=' + encodeURIComponent(msg);
 
