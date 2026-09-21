@@ -153,12 +153,24 @@
         justify-content: center !important;
       }
     }
+    .w-input, .text-field, input.text-field, textarea.text-field {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+      caret-color: #d4ff00 !important;
+    }
+    .w-input::placeholder, .text-field::placeholder {
+      color: rgba(255, 255, 255, 0.45) !important;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0.45) !important;
+    }
     .w-input[readonly] {
       background-color: transparent !important;
       color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
     }
     .text-field:focus {
       border-bottom-color: var(--_colors---brand-primary) !important;
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
     }
   
 /* WHY PREM FITNESS MODAL */
