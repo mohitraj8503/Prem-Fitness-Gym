@@ -131,14 +131,17 @@ The pricing architecture presents transparent membership value with balanced col
   <img src="assets/preview/pricing.png" alt="Prem Fitness Gym Pricing" width="900" style="border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.6);"/>
 </div>
 
-### Annual Membership Details:
-- **Fee**: **₹4,500 / year** (Transparent, all-inclusive gym floor access)
-- **What's Included**:
-  - Full 365-day access to gym floor & equipment
-  - Wide variety of strength machines & free weights
-  - Attentive workout guidance & trainer support
-  - Spacious, clean, and motivating training environment
-- **Conversion Flow**: Clicking **Register Now** routes straight to `register.html`.
+### Membership Packages (With The Power of Fitline Equipment):
+- **Registration Fee**: **₹500** (One-time fee)
+- **1. Basic Package**: **₹1,300 / 1 Month**
+  - Full gym floor access, Fitline equipment, floor guidance
+- **2. Standard Package**: **₹3,000 / 3 Months**
+  - Save ₹900 vs monthly rate, progressive workout routine
+- **3. Premium Package**: **₹6,000 / 6 Months**
+  - **🎁 FREE GIFTS** on full payment: Leather Gym Bag + Shaker + Creatine
+- **4. Ultimate Package**: **₹10,000 / 12 Months** (Best Value ~₹833/mo)
+  - **🔥 4 FREE GIFTS** on full payment: Leather Gym Bag + Shaker + Creatine + Peanut Butter
+- **Conversion Flow**: Selecting any package routes straight to `register.html` with that package pre-selected.
 
 ---
 

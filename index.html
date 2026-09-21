@@ -467,43 +467,244 @@
 }
 </script>
 <style>
-  .plan-grid.single-plan {
-    grid-template-columns: 1fr !important;
-    max-width: 980px !important;
-    margin: 40px auto 0 !important;
-  }
-  .plan-card.horizontal {
-    max-width: 100% !important;
-    padding: 48px 44px !important;
+  .plan-grid.packages-4-grid {
     display: grid !important;
-    grid-template-columns: 1.25fr 1.1fr !important;
-    gap: 40px !important;
-    align-items: center !important;
-    position: relative !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    width: 100% !important;
+    margin: 36px 0 0 !important;
   }
-  .plan-card-benefits {
-    order: 1;
+  .pkg-card {
+    background: #181818;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
-  .plan-card-pricing {
-    order: 2;
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
-    padding-left: 36px;
+  .pkg-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 255, 0, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 255, 0, 0.08);
   }
-  @media (max-width: 820px) {
-    .plan-card.horizontal {
+  .pkg-card.featured {
+    border-color: #d4ff00;
+    background: linear-gradient(180deg, rgba(212, 255, 0, 0.06) 0%, #181818 100%);
+  }
+  .pkg-badge {
+    display: inline-block;
+    background: rgba(212, 255, 0, 0.12);
+    color: #d4ff00;
+    border: 1px solid rgba(212, 255, 0, 0.3);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+  .pkg-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    line-height: 1.1;
+  }
+  .pkg-duration {
+    color: #888888;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .pkg-price {
+    font-size: 38px;
+    font-weight: 700;
+    color: #d4ff00;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pkg-subtext {
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  .pkg-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 18px;
+    flex-grow: 1;
+  }
+  .pkg-feature-item {
+    font-size: 13px;
+    color: #cccccc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .pkg-feature-item svg {
+    flex-shrink: 0;
+    color: #d4ff00;
+  }
+  .pkg-btn {
+    width: 100%;
+    text-align: center;
+    display: block;
+    background: #ffffff;
+    color: #000000;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .pkg-btn:hover {
+    background: #d4ff00;
+    color: #000000;
+    box-shadow: 0 6px 18px rgba(212, 255, 0, 0.3);
+  }
+  .pkg-card.featured .pkg-btn {
+    background: #d4ff00;
+    color: #000000;
+  }
+  .pkg-card.featured .pkg-btn:hover {
+    background: #ffffff;
+  }
+  .offers-banner-wrap {
+    margin-top: 36px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .offer-card {
+    background: #181818;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .offer-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .offer-tag {
+    background: #d4ff00;
+    color: #000;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+  }
+  .offer-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+  .offer-desc {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .gifts-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .gift-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .gift-badge span.accent {
+    color: #d4ff00;
+  }
+  .reg-note-box {
+    margin-top: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+  .reg-fee-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #fff;
+  }
+  .reg-fee-item strong {
+    color: #d4ff00;
+    font-size: 16px;
+  }
+  .reg-note-list {
+    font-size: 12px;
+    color: #888;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (max-width: 1024px) {
+    .plan-grid.packages-4-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+  @media (max-width: 640px) {
+    .plan-grid.packages-4-grid {
       grid-template-columns: 1fr !important;
-      padding: 32px 24px !important;
-      gap: 28px !important;
     }
-    .plan-card-pricing {
-      order: 1 !important;
-      border-left: none !important;
-      padding-left: 0 !important;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-      padding-bottom: 24px !important;
+    .offers-banner-wrap {
+      grid-template-columns: 1fr;
     }
-    .plan-card-benefits {
-      order: 2 !important;
+    .reg-note-box {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  /* Prem Aryan trainer card adjustment - shift down slightly */
+  #w-node-_3c3ea27f-1447-e85f-8708-3b7392a7a389-f7b75dd1 {
+    margin-top: 60px !important;
+  }
+  @media (max-width: 991px) {
+    #w-node-_3c3ea27f-1447-e85f-8708-3b7392a7a389-f7b75dd1 {
+      margin-top: 30px !important;
+    }
+  }
+  @media (max-width: 479px) {
+    #w-node-_3c3ea27f-1447-e85f-8708-3b7392a7a389-f7b75dd1 {
+      margin-top: 20px !important;
     }
   }
 
@@ -515,33 +716,131 @@
 <div class="w-slide"><div class="w-layout-grid testi-grid"><div class="testi-left"><img sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/prem_gym_equipment-p-500.webp 500w, images/prem_gym_equipment-p-800.webp 800w, images/prem_gym_equipment-p-1080.webp 1080w, images/prem_gym_equipment.webp 1232w" alt="Prem Fitness Gym Strength Training — Shirsh Raj" src="images/prem_gym_equipment.webp" loading="lazy" class="testi-image"/></div><div class="testi-right"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="64" height="64" viewBox="0 0 256 256" app="ikonik" class="testi-icon"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z" app="ikonik"></path><rect width="256" height="256" fill="none" app="ikonik"></rect></svg><p class="testi-quote">Good facility, proper machinary and lively environment.. trainer(@justinanshu) here is also very supportive and professionally trained... Overall highly recommend👍</p><div class="testi-name">— Shirsh Raj (Google Review ★★★★★)</div></div></div></div>
 <div class="w-slide"><div class="w-layout-grid testi-grid"><div class="testi-left"><img sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/prem_gym_training-p-500.webp 500w, images/prem_gym_training-p-800.webp 800w, images/prem_gym_training-p-1080.webp 1080w, images/prem_gym_training.webp 1232w" alt="Prem Fitness Gym Workout — Satyam Shandilya" src="images/prem_gym_training.webp" loading="lazy" class="testi-image"/></div><div class="testi-right"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="64" height="64" viewBox="0 0 256 256" app="ikonik" class="testi-icon"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z" app="ikonik"></path><rect width="256" height="256" fill="none" app="ikonik"></rect></svg><p class="testi-quote">Since.. It was my first time.. That i am going gym.. This was a wonderful experience coming here and doing exercise... More greatful to trainer @justin_anshu.. Who guided me to do exercise easy.. I recommend you all to come and visit gym...</p><div class="testi-name">— Satyam Shandilya (Google Review ★★★★★)</div></div></div></div>
 <div class="w-slide"><div class="w-layout-grid testi-grid"><div class="testi-left"><img sizes="(max-width: 767px) 100vw, (max-width: 991px) 728px, 940px" srcset="images/prem_gym_interior_sign-p-500.webp 500w, images/prem_gym_interior_sign-p-800.webp 800w, images/prem_gym_interior_sign-p-1080.webp 1080w, images/prem_gym_interior_sign.webp 1232w" alt="Prem Fitness Gym Barbells &amp; Equipment — Siddharth Shashank" src="images/prem_gym_interior_sign.webp" loading="lazy" class="testi-image"/></div><div class="testi-right"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="64" height="64" viewBox="0 0 256 256" app="ikonik" class="testi-icon"><path d="M116,72v88a48.05,48.05,0,0,1-48,48,8,8,0,0,1,0-16,32,32,0,0,0,32-32v-8H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56h60A16,16,0,0,1,116,72ZM216,56H156a16,16,0,0,0-16,16v64a16,16,0,0,0,16,16h60v8a32,32,0,0,1-32,32,8,8,0,0,0,0,16,48.05,48.05,0,0,0,48-48V72A16,16,0,0,0,216,56Z" app="ikonik"></path><rect width="256" height="256" fill="none" app="ikonik"></rect></svg><p class="testi-quote">Awesome gym...all time favorite and the trainer @justin_anshu have good behaviour...all the equipments are good.</p><div class="testi-name">— Siddharth Shashank (Google Review ★★★★★)</div></div></div></div>
-</div><div class="testi-prev w-slider-arrow-left"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" app="ikonik" class="testi-icon-left"><path fill-rule="evenodd" d="M20.25 12a.75.75 0 01-.75.75H6.31l5.47 5.47a.75.75 0 11-1.06 1.06l-6.75-6.75a.75.75 0 010-1.06l6.75-6.75a.75.75 0 111.06 1.06l-5.47 5.47H19.5a.75.75 0 01.75.75z" clip-rule="evenodd" app="ikonik"></path></svg></div><div class="testi-next w-slider-arrow-right"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" app="ikonik" class="testi-icon-right"><path fill-rule="evenodd" d="M20.25 12a.75.75 0 01-.75.75H6.31l5.47 5.47a.75.75 0 11-1.06 1.06l-6.75-6.75a.75.75 0 010-1.06l6.75-6.75a.75.75 0 111.06 1.06l-5.47 5.47H19.5a.75.75 0 01.75.75z" clip-rule="evenodd" app="ikonik"></path></svg></div><div class="slide-nav w-slider-nav w-round"></div></div></div></div></div></section><section id="section-pricing"><div class="plan-section"><div class="w-layout-blockcontainer global-container w-container"><div class="global-section-padding"><div class="plan-wrapper"><div class="global-section-name">(PRICING)</div><h2 class="plan-section-heading">Membership That Fits Your Goals</h2><p class="plan-section-description">Full year fitness membership at Prem Fitness Gym, Bhagalpur. Transparent pricing with dedicated workout floor access.</p></div><div data-w-id="0e86b57e-00af-2362-8e9a-05df61118edb" style="opacity:0" class="w-layout-grid plan-grid single-plan">
-  <div class="plan-card horizontal">
-    <!-- LEFT: WHAT'S INCLUDED -->
-    <div class="plan-card-benefits">
-      <div class="plan-features" style="margin-top: 0;">
-        <div class="plan-feature-intro" style="font-size: 18px; margin-bottom: 16px; color: #fff; font-weight: 600;">What's included:</div>
-        <ul role="list" class="plan-feature-list" style="display: grid; grid-template-columns: 1fr; gap: 14px;">
-          <li><div class="plan-feature">Full 365-day access to gym floor &amp; equipment</div></li>
-          <li><div class="plan-feature">Wide variety of strength machines &amp; free weights</div></li>
-          <li><div class="plan-feature">Attentive workout guidance &amp; trainer support</div></li>
-          <li><div class="plan-feature">Spacious, clean, and motivating training environment</div></li>
-        </ul>
-      </div>
-    </div>
+</div><div class="testi-prev w-slider-arrow-left"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" app="ikonik" class="testi-icon-left"><path fill-rule="evenodd" d="M20.25 12a.75.75 0 01-.75.75H6.31l5.47 5.47a.75.75 0 11-1.06 1.06l-6.75-6.75a.75.75 0 010-1.06l6.75-6.75a.75.75 0 111.06 1.06l-5.47 5.47H19.5a.75.75 0 01.75.75z" clip-rule="evenodd" app="ikonik"></path></svg></div><div class="testi-next w-slider-arrow-right"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" app="ikonik" class="testi-icon-right"><path fill-rule="evenodd" d="M20.25 12a.75.75 0 01-.75.75H6.31l5.47 5.47a.75.75 0 11-1.06 1.06l-6.75-6.75a.75.75 0 010-1.06l6.75-6.75a.75.75 0 111.06 1.06l-5.47 5.47H19.5a.75.75 0 01.75.75z" clip-rule="evenodd" app="ikonik"></path></svg></div><div class="slide-nav w-slider-nav w-round"></div></div></div></div></div></section><section id="section-pricing"><div class="plan-section"><div class="w-layout-blockcontainer global-container w-container"><div class="global-section-padding"><div class="plan-wrapper"><div class="global-section-name">(MEMBERSHIP PLANS)</div><h2 class="plan-section-heading">Gym Membership Packages</h2><p class="plan-section-description">With The Power of Fitline Equipment — Choose the perfect package to transform your strength and fitness on Laluchak Bhatta Road, Bhagalpur.</p></div>
 
-    <!-- RIGHT: ANNUAL MEMBERSHIP / PRICING / REGISTER NOW -->
-    <div class="plan-card-pricing">
-      <div class="plan-tag" style="position: static; display: inline-block; margin-bottom: 14px;"><div>🔥 Annual Membership</div></div>
-      <h3 class="plan-name" style="font-size: 36px; line-height: 1.15; margin-bottom: 8px;">Annual Membership</h3>
-      <p class="plan-description" style="margin-bottom: 18px; color: #bbb; max-width: 380px; font-size: 15px; line-height: 1.5;">12-month gym floor access for strength training and regular workouts on Laluchak Bhatta Road.</p>
-      <div class="plan-price" style="font-size: 54px; line-height: 1; margin-bottom: 22px;">₹4,500<span class="plan-subs" style="font-size: 20px; color: #888;"> /year</span></div>
-      <div>
-        <a href="register.html" class="button w-inline-block"><div class="button-inner"><div class="button-text">Register Now</div></div></a>
-      </div>
+<!-- 4 PACKAGES GRID -->
+<div class="plan-grid packages-4-grid">
+
+  <!-- 1. BASIC PACKAGE -->
+  <div class="pkg-card">
+    <div>
+      <div class="pkg-badge">Starter</div>
+      <h3 class="pkg-name">BASIC PACKAGE</h3>
+      <div class="pkg-duration">Duration: 1 Month</div>
+      <div class="pkg-price">₹1,300<span style="font-size: 16px; color: #888; font-weight: normal;">/-</span></div>
+      <div class="pkg-subtext">+ ₹500 Registration (One-time)</div>
+      <ul class="pkg-features">
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Full gym floor access</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Fitline strength &amp; cardio gear</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Trainer guidance on floor</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Locker &amp; changing area</li>
+      </ul>
+    </div>
+    <a href="register.html?plan=basic" class="pkg-btn">Join Basic — ₹1,300</a>
+  </div>
+
+  <!-- 2. STANDARD PACKAGE -->
+  <div class="pkg-card">
+    <div>
+      <div class="pkg-badge">Quarterly</div>
+      <h3 class="pkg-name">STANDARD PACKAGE</h3>
+      <div class="pkg-duration">Duration: 3 Months</div>
+      <div class="pkg-price">₹3,000<span style="font-size: 16px; color: #888; font-weight: normal;">/-</span></div>
+      <div class="pkg-subtext">Save ₹900 vs monthly (₹1,000/mo)</div>
+      <ul class="pkg-features">
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>3 Months full facility access</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Progressive training routine</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Fitline strength equipment</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Coach Anshu support</li>
+      </ul>
+    </div>
+    <a href="register.html?plan=standard" class="pkg-btn">Join Standard — ₹3,000</a>
+  </div>
+
+  <!-- 3. PREMIUM PACKAGE (6 MONTHS) -->
+  <div class="pkg-card featured">
+    <div>
+      <div class="pkg-badge" style="background:#d4ff00;color:#000;">🎁 Free Gifts Included</div>
+      <h3 class="pkg-name">PREMIUM PACKAGE</h3>
+      <div class="pkg-duration">Duration: 6 Months</div>
+      <div class="pkg-price">₹6,000<span style="font-size: 16px; color: #888; font-weight: normal;">/-</span></div>
+      <div class="pkg-subtext">Only ₹1,000/mo + FREE GIFT COMBO</div>
+      <ul class="pkg-features">
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>6 Months unrestricted access</li>
+        <li class="pkg-feature-item" style="color:#d4ff00;font-weight:600;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>FREE Leather Bag + Shaker + Creatine</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Full body goal evaluation</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Diet &amp; workout progression</li>
+      </ul>
+    </div>
+    <a href="register.html?plan=premium" class="pkg-btn">Join Premium — ₹6,000</a>
+  </div>
+
+  <!-- 4. ULTIMATE PACKAGE (12 MONTHS) -->
+  <div class="pkg-card featured" style="border-color:#d4ff00;box-shadow:0 0 30px rgba(212,255,0,0.15);">
+    <div>
+      <div class="pkg-badge" style="background:#d4ff00;color:#000;">🔥 Best Value + 4 Gifts</div>
+      <h3 class="pkg-name">ULTIMATE PACKAGE</h3>
+      <div class="pkg-duration">Duration: 12 Months</div>
+      <div class="pkg-price">₹10,000<span style="font-size: 16px; color: #888; font-weight: normal;">/-</span></div>
+      <div class="pkg-subtext">Best rate (~₹833/mo) + MEGA GIFTS</div>
+      <ul class="pkg-features">
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Full 365 days access</li>
+        <li class="pkg-feature-item" style="color:#d4ff00;font-weight:600;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>FREE Bag + Shaker + Creatine + Peanut Butter</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Priority trainer support</li>
+        <li class="pkg-feature-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Complete physique transformation</li>
+      </ul>
+    </div>
+    <a href="register.html?plan=ultimate" class="pkg-btn">Join Ultimate — ₹10,000</a>
+  </div>
+
+</div>
+
+<!-- SPECIAL GIFTS OFFER BANNER -->
+<div class="offers-banner-wrap">
+  <div class="offer-card">
+    <div class="offer-header">
+      <span class="offer-tag">Special Offer</span>
+      <h4 class="offer-title">🎁 6 MONTHS PACKAGE GIFTS</h4>
+    </div>
+    <div class="offer-desc">One Time Full Payment karne par paye Prem Fitness Gym ki taraf se <strong>FREE GIFTS</strong>:</div>
+    <div class="gifts-row">
+      <div class="gift-badge">👜 Leather Gym Bag</div>
+      <div class="gift-badge">🥤 Gym Shaker</div>
+      <div class="gift-badge"><span class="accent">⚡ Creatine</span></div>
     </div>
   </div>
-</div></div></div></div></section><section id="section-locations"><div class="w-layout-blockcontainer global-container w-container"><div class="global-section-padding"><div class="w-layout-grid locator-grid"><div id="w-node-_413beaa9-9d4a-771e-893a-e4b1c4e4fdab-f7b75dd1" class="locator-left"><div class="map-wrapper"><div class="map jakarta w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="map bandung w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="map surabaya w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="map bali w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div></div><div class="locator-right"><div class="global-section-name">(OUR Location)</div><h2 class="locator-heading">Locate Us</h2><p class="locator-paragraph">Come feel the energy yourself. Conveniently located on Laluchak Bhatta Road, near Ujjwal Misthan in Bhagalpur.</p><div class="locator-list"><div data-w-id="e45e7432-4bd1-5985-d68e-584436a5586b" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Main Gym Facility</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Prem Fitness Gym</div><a href="https://www.google.com/maps/search/?api=1&amp;query=Prem+Fitness+Gym+Laluchak+Bhatta+Rd+near+Ujjwal+Misthan+Angari+Bhagalpur+Bihar+812001" target="_blank" class="branch-address">Laluchak Bhatta Rd, near Ujjwal Misthan, Angari, Bhagalpur, Bihar 812001</a><a href="tel:+918051647464" class="branch-address">+91 8051647464</a></div></li></ul></div></div><div data-w-id="16ea9932-a5ad-d4d9-c32a-0e69f00c816a" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Opening Hours</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Daily Workout Batches</div><div class="branch-address" style="color:#aaa;">Morning &amp; Evening sessions available. Timings may vary by season.</div><a href="https://wa.me/918051647464?text=Hi%2C%20what%20are%20the%20current%20gym%20hours%20at%20Prem%20Fitness%20Gym%3F" target="_blank" class="branch-address">Contact +91 8051647464 for current batch timings</a></div></li></ul></div></div><div data-w-id="cd0f93d3-5bde-cc39-ca24-ec5cbdd2004b" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Landmark &amp; Access</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Prominent Landmarks</div><div class="branch-address" style="color:#aaa;">Located near Ujjwal Misthan Bhandar &amp; Kali Mandir. Easily accessible from Ishakchak, Mirjanhat, and central Bhagalpur.</div><a href="https://www.google.com/maps/search/?api=1&amp;query=Prem+Fitness+Gym+Bhagalpur" target="_blank" class="branch-address">Open in Google Maps</a></div></li></ul></div></div><div data-w-id="c80433ef-b34f-a379-d87d-4fb2a8d17d9f" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Inquiries &amp; Admissions</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Direct Gym Inquiries</div><a href="https://wa.me/918051647464" target="_blank" class="branch-address">WhatsApp: +91 8051647464</a><a href="https://www.instagram.com/premfitnessgym/" target="_blank" class="branch-address">Instagram: @premfitnessgym</a></div></li></ul></div></div></div></div></div></div></div></section><section id="section-contact"><div class="contact-section"><div class="w-layout-blockcontainer global-container w-container"><div class="global-section-padding bottom-half"><div class="w-layout-grid contact-wrapper"><div id="w-node-_7a846a9c-32bb-bdaa-fc23-421d60558a69-f7b75dd1" class="global-section-name">(CONTACT US)</div><div id="w-node-_2a88cf33-8f3d-4ab9-eb35-6d7077992bd7-f7b75dd1" class="contact-form w-form"><form id="wf-form-Contact-Us" name="wf-form-Contact-Us" data-name="Contact Us" method="get" data-wf-page-id="6885ed75e6aefae7f7b75dd1" data-wf-element-id="2a88cf33-8f3d-4ab9-eb35-6d7077992bd8"><label for="name" class="form-label">Name*</label><input class="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your name" type="text" id="name" required=""/><label for="Phone" class="form-label">Phone Number*</label><input class="text-field w-input" maxlength="256" name="Phone" data-name="Phone" placeholder="Enter your number" type="tel" id="Phone" required=""/><label for="Message" class="form-label">Message</label><textarea id="Message" name="Message" maxlength="5000" data-name="Message" placeholder="Enter your message" class="text-field w-input"></textarea><div class="form-button-wrapper"><div>We’ll reach you fast</div><input type="submit" data-wait="Please wait..." class="button primary w-button" value="Submit"/></div></form><div class="success-message w-form-done"><div class="message-wrapper"><svg id="w-node-_62f12cd4-3370-cd95-7837-8bfa1d6c9524-f7b75dd1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 1024 1024" app="ikonik" class="message-icon success"><path fill="currentColor" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 0 1-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z" app="ikonik" class="path-0vl6hj"></path></svg><div class="message-title">Great!</div><div class="message-description">Your submission has been received! We&#x27;ll make sure to reach out quickly!</div></div></div><div class="error-message w-form-fail"><div class="message-wrapper"><svg id="w-node-b7d33042-e29f-7eda-e023-6a2245245700-f7b75dd1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 1024 1024" fill="currentColor" fill-rule="evenodd" app="ikonik" class="message-icon error"><path fill="currentColor" d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64Zm127.978 274.82-.034.006c-.023.007-.042.018-.083.059L512 466.745l-127.86-127.86c-.042-.041-.06-.052-.084-.059a.118.118 0 0 0-.07 0c-.022.007-.041.018-.082.059l-45.02 45.019c-.04.04-.05.06-.058.083a.118.118 0 0 0 0 .07l.01.022a.268.268 0 0 0 .049.06L466.745 512l-127.86 127.862c-.041.04-.052.06-.059.083a.118.118 0 0 0 0 .07c.007.022.018.041.059.082l45.019 45.02c.04.04.06.05.083.058a.118.118 0 0 0 .07 0c.022-.007.041-.018.082-.059L512 557.254l127.862 127.861c.04.041.06.052.083.059a.118.118 0 0 0 .07 0c.022-.007.041-.018.082-.059l45.02-45.019c.04-.04.05-.06.058-.083a.118.118 0 0 0 0-.07l-.01-.022a.268.268 0 0 0-.049-.06L557.254 512l127.861-127.86c.041-.042.052-.06.059-.084a.118.118 0 0 0 0-.07c-.007-.022-.018-.041-.059-.082l-45.019-45.02c-.04-.04-.06-.05-.083-.058a.118.118 0 0 0-.07 0Z" app="ikonik" class="path-lftq8"></path></svg><div class="message-title">Oopps...</div><div class="message-description">Something went wrong while submitting the form. Please try again later.</div></div></div></div><div id="w-node-e2ec9c73-8789-9b6f-bf9a-984d16d4cedc-f7b75dd1" class="contact-links">
+
+  <div class="offer-card" style="border-color: rgba(212, 255, 0, 0.45);">
+    <div class="offer-header">
+      <span class="offer-tag" style="background:#fff;color:#000;">Mega Offer</span>
+      <h4 class="offer-title">🔥 12 MONTHS PACKAGE GIFTS</h4>
+    </div>
+    <div class="offer-desc">One Time Full Payment karne par paye Prem Fitness Gym ki taraf se <strong>4 FREE GIFTS</strong>:</div>
+    <div class="gifts-row">
+      <div class="gift-badge">👜 Leather Gym Bag</div>
+      <div class="gift-badge">🥤 Gym Shaker</div>
+      <div class="gift-badge"><span class="accent">⚡ Creatine</span></div>
+      <div class="gift-badge"><span class="accent">🥜 Peanut Butter</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTRATION & RULES NOTE -->
+<div class="reg-note-box">
+  <div class="reg-fee-item">
+    <span>Registration Fee:</span>
+    <strong>₹500/-</strong>
+    <span style="color:#aaa;font-size:12px;">(One-time fee)</span>
+  </div>
+  <ul class="reg-note-list">
+    <li>✓ Access to all gym facility with Fitline equipment</li>
+    <li>✓ Referral discounts available</li>
+    <li>✓ Free gifts valid on one-time full payment</li>
+    <li>✓ Advance payment applicable</li>
+  </ul>
+</div>
+
+</div></div></div></section><section id="section-locations"><div class="w-layout-blockcontainer global-container w-container"><div class="global-section-padding"><div class="w-layout-grid locator-grid"><div id="w-node-_413beaa9-9d4a-771e-893a-e4b1c4e4fdab-f7b75dd1" class="locator-left"><div class="map-wrapper"><div class="map jakarta w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="map bandung w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="map surabaya w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="map bali w-embed w-iframe"><iframe src="https://maps.google.com/maps?q=Prem+Fitness+Gym,+Laluchak+Bhatta+Rd,+near+Ujjwal+Misthan,+Angari,+Bhagalpur,+Bihar+812001&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div></div><div class="locator-right"><div class="global-section-name">(OUR Location)</div><h2 class="locator-heading">Locate Us</h2><p class="locator-paragraph">Come feel the energy yourself. Conveniently located on Laluchak Bhatta Road, near Ujjwal Misthan in Bhagalpur.</p><div class="locator-list"><div data-w-id="e45e7432-4bd1-5985-d68e-584436a5586b" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Main Gym Facility</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Prem Fitness Gym</div><a href="https://www.google.com/maps/search/?api=1&amp;query=Prem+Fitness+Gym+Laluchak+Bhatta+Rd+near+Ujjwal+Misthan+Angari+Bhagalpur+Bihar+812001" target="_blank" class="branch-address">Laluchak Bhatta Rd, near Ujjwal Misthan, Angari, Bhagalpur, Bihar 812001</a><a href="tel:+918051647464" class="branch-address">+91 8051647464</a></div></li></ul></div></div><div data-w-id="16ea9932-a5ad-d4d9-c32a-0e69f00c816a" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Opening Hours</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Daily Workout Batches</div><div class="branch-address" style="color:#aaa;">Morning &amp; Evening sessions available. Timings may vary by season.</div><a href="https://wa.me/918051647464?text=Hi%2C%20what%20are%20the%20current%20gym%20hours%20at%20Prem%20Fitness%20Gym%3F" target="_blank" class="branch-address">Contact +91 8051647464 for current batch timings</a></div></li></ul></div></div><div data-w-id="cd0f93d3-5bde-cc39-ca24-ec5cbdd2004b" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Landmark &amp; Access</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Prominent Landmarks</div><div class="branch-address" style="color:#aaa;">Located near Ujjwal Misthan Bhandar &amp; Kali Mandir. Easily accessible from Ishakchak, Mirjanhat, and central Bhagalpur.</div><a href="https://www.google.com/maps/search/?api=1&amp;query=Prem+Fitness+Gym+Bhagalpur" target="_blank" class="branch-address">Open in Google Maps</a></div></li></ul></div></div><div data-w-id="c80433ef-b34f-a379-d87d-4fb2a8d17d9f" class="accordion-card"><div class="accordion-heading"><div class="accordion-title">Inquiries &amp; Admissions</div><div style="background-color:rgb(29,29,29);color:rgb(255,255,255)" class="accordion-toggle"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" app="ikonik" class="plus-icon"><path d="M7 12L17 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-h"></path><path style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(null) rotateY(0) rotateZ(0deg) skew(0, 0);transform-style:preserve-3d" d="M12 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" app="ikonik" class="plus-line-v"></path></svg></div></div><div style="height:0px;-webkit-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 80px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="accordion-content"><ul role="list" class="branch-list"><li><div class="branch-item"><div class="branch-name">Direct Gym Inquiries</div><a href="https://wa.me/918051647464" target="_blank" class="branch-address">WhatsApp: +91 8051647464</a><a href="https://www.instagram.com/premfitnessgym/" target="_blank" class="branch-address">Instagram: @premfitnessgym</a></div></li></ul></div></div></div></div></div></div></div></section><section id="section-contact"><div class="contact-section"><div class="w-layout-blockcontainer global-container w-container"><div class="global-section-padding bottom-half"><div class="w-layout-grid contact-wrapper"><div id="w-node-_7a846a9c-32bb-bdaa-fc23-421d60558a69-f7b75dd1" class="global-section-name">(CONTACT US)</div><div id="w-node-_2a88cf33-8f3d-4ab9-eb35-6d7077992bd7-f7b75dd1" class="contact-form w-form"><form id="wf-form-Contact-Us" name="wf-form-Contact-Us" data-name="Contact Us" method="get" data-wf-page-id="6885ed75e6aefae7f7b75dd1" data-wf-element-id="2a88cf33-8f3d-4ab9-eb35-6d7077992bd8"><label for="name" class="form-label">Name*</label><input class="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your name" type="text" id="name" required=""/><label for="Phone" class="form-label">Phone Number*</label><input class="text-field w-input" maxlength="256" name="Phone" data-name="Phone" placeholder="Enter your number" type="tel" id="Phone" required=""/><label for="Message" class="form-label">Message</label><textarea id="Message" name="Message" maxlength="5000" data-name="Message" placeholder="Enter your message" class="text-field w-input"></textarea><div class="form-button-wrapper"><div>We’ll reach you fast</div><input type="submit" data-wait="Please wait..." class="button primary w-button" value="Submit"/></div></form><div class="success-message w-form-done"><div class="message-wrapper"><svg id="w-node-_62f12cd4-3370-cd95-7837-8bfa1d6c9524-f7b75dd1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 1024 1024" app="ikonik" class="message-icon success"><path fill="currentColor" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 0 1-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z" app="ikonik" class="path-0vl6hj"></path></svg><div class="message-title">Great!</div><div class="message-description">Your submission has been received! We&#x27;ll make sure to reach out quickly!</div></div></div><div class="error-message w-form-fail"><div class="message-wrapper"><svg id="w-node-b7d33042-e29f-7eda-e023-6a2245245700-f7b75dd1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 1024 1024" fill="currentColor" fill-rule="evenodd" app="ikonik" class="message-icon error"><path fill="currentColor" d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64Zm127.978 274.82-.034.006c-.023.007-.042.018-.083.059L512 466.745l-127.86-127.86c-.042-.041-.06-.052-.084-.059a.118.118 0 0 0-.07 0c-.022.007-.041.018-.082.059l-45.02 45.019c-.04.04-.05.06-.058.083a.118.118 0 0 0 0 .07l.01.022a.268.268 0 0 0 .049.06L466.745 512l-127.86 127.862c-.041.04-.052.06-.059.083a.118.118 0 0 0 0 .07c.007.022.018.041.059.082l45.019 45.02c.04.04.06.05.083.058a.118.118 0 0 0 .07 0c.022-.007.041-.018.082-.059L512 557.254l127.862 127.861c.04.041.06.052.083.059a.118.118 0 0 0 .07 0c.022-.007.041-.018.082-.059l45.02-45.019c.04-.04.05-.06.058-.083a.118.118 0 0 0 0-.07l-.01-.022a.268.268 0 0 0-.049-.06L557.254 512l127.861-127.86c.041-.042.052-.06.059-.084a.118.118 0 0 0 0-.07c-.007-.022-.018-.041-.059-.082l-45.019-45.02c-.04-.04-.06-.05-.083-.058a.118.118 0 0 0-.07 0Z" app="ikonik" class="path-lftq8"></path></svg><div class="message-title">Oopps...</div><div class="message-description">Something went wrong while submitting the form. Please try again later.</div></div></div></div><div id="w-node-e2ec9c73-8789-9b6f-bf9a-984d16d4cedc-f7b75dd1" class="contact-links">
   <div class="contact-item-block">
     <a href="tel:+918051647464" class="contact-phone-link" aria-label="Call Prem Fitness Gym at +91 8051647464">
       +91 8051647464
@@ -635,15 +934,15 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12"></path><path d="M6 8h12"></path><path d="M6 13l8.5 8"></path><path d="M6 13h3a4 4 0 0 0 0-8"></path></svg>
           </div>
           <div class="why-item-content">
-            <h4>Unbeatable ₹4,500/Year Value</h4>
-            <p>Full 365-day all-inclusive membership at under ₹375/month — Bhagalpur's most cost-effective gym experience.</p>
+            <h4>Flexible Packages &amp; Free Gifts</h4>
+            <p>1M, 3M, 6M &amp; 12M plans available. Get free leather gym bag, shaker, creatine &amp; peanut butter on 6M &amp; 12M packages.</p>
           </div>
         </div>
       </div>
     </div>
     <div class="why-modal-footer">
       <a href="register.html" class="why-cta-btn">
-        <span>Register Now — ₹4,500 / Year</span>
+        <span>View Packages &amp; Join Now</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>

@@ -54,6 +54,75 @@
       border-radius: var(--_sizing---radius--24);
       padding: 44px 36px;
     }
+    .plan-select-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 580px) {
+      .plan-select-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .plan-option-card {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 14px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+    }
+    .plan-option-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(212, 255, 0, 0.4);
+    }
+    .plan-option-card.selected {
+      border-color: #d4ff00;
+      background: rgba(212, 255, 0, 0.08);
+    }
+    .plan-option-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .plan-option-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+    .plan-option-badge {
+      font-size: 10px;
+      background: #d4ff00;
+      color: #000;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .plan-option-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: #d4ff00;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    .plan-option-duration {
+      font-size: 11px;
+      color: #888;
+    }
+    .plan-option-gift {
+      font-size: 11px;
+      color: #d4ff00;
+      font-weight: 600;
+      margin-top: 2px;
+    }
     @media (max-width: 479px) {
       .reg-plan-card, .reg-form-card {
         padding: 32px 20px;
@@ -276,52 +345,105 @@
           <!-- LEFT: PLAN SUMMARY CARD -->
           <div class="reg-plan-card">
             <div class="plan-tag" style="position: static; display: inline-block; margin-bottom: 18px;">
-              <div>🔥 Official Membership Plan</div>
+              <div id="summary-tag">🔥 Best Value Plan</div>
             </div>
             
-            <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-bottom: 6px;">MEMBERSHIP PLAN</div>
-            <h2 class="plan-name" style="font-size: 34px; line-height: 1.1; margin-bottom: 10px;">Prem Fitness Gym</h2>
+            <div style="font-size: 13px; font-weight: 600; letter-spacing: 2px; color: #888; text-transform: uppercase; margin-bottom: 6px;">SELECTED MEMBERSHIP</div>
+            <h2 class="plan-name" id="summary-name" style="font-size: 34px; line-height: 1.1; margin-bottom: 6px;">Ultimate Package</h2>
+            <div id="summary-duration" style="color: #888; font-size: 14px; margin-bottom: 16px;">Duration: 12 Months</div>
             
-            <div class="plan-price" style="font-size: 52px; line-height: 1; margin-bottom: 20px;">
-              ₹4,500<span class="plan-subs" style="font-size: 20px; color: #888;"> / Year</span>
+            <div class="plan-price" id="summary-price" style="font-size: 50px; line-height: 1; margin-bottom: 8px;">
+              ₹10,000<span class="plan-subs" style="font-size: 18px; color: #888;"> /-</span>
+            </div>
+            <div style="color: #999; font-size: 13px; margin-bottom: 20px;">+ ₹500 One-time Registration Fee</div>
+
+            <!-- FREE GIFTS BOX (FOR 6M / 12M) -->
+            <div id="summary-gifts-box" style="background: rgba(212, 255, 0, 0.08); border: 1px solid rgba(212, 255, 0, 0.3); border-radius: 12px; padding: 14px 16px; margin-bottom: 22px;">
+              <div style="color: #d4ff00; font-weight: 700; font-size: 13px; margin-bottom: 6px;">🎁 FREE GIFTS ON FULL PAYMENT:</div>
+              <div id="summary-gifts-text" style="color: #ffffff; font-size: 13px; line-height: 1.4;">Leather Gym Bag + Shaker + Creatine + Peanut Butter</div>
             </div>
             
-            <p style="color: #bbb; line-height: 1.6; margin-bottom: 24px; font-size: 15px;">
-              Complete 12-month membership registration with full privileges and unlimited gym floor access on Laluchak Bhatta Road, Bhagalpur.
+            <p id="summary-desc" style="color: #bbb; line-height: 1.6; margin-bottom: 22px; font-size: 14px;">
+              Full 365-day membership with unlimited access to all gym facilities and Fitline strength equipment on Laluchak Bhatta Road, Bhagalpur.
             </p>
             
             <div class="plan-features" style="margin-top: 0;">
-              <div class="plan-feature-intro" style="font-size: 16px; margin-bottom: 14px; color: #fff; font-weight: 600;">What's included in your membership:</div>
-              <ul role="list" class="plan-feature-list" style="display: grid; gap: 12px;">
-                <li><div class="plan-feature">Full 365-day access to gym floor &amp; all workout zones</div></li>
-                <li><div class="plan-feature">Modern smith machine, cable crossovers &amp; free weights</div></li>
-                <li><div class="plan-feature">Attentive workout guidance &amp; support from Coach Anshu</div></li>
+              <div class="plan-feature-intro" style="font-size: 15px; margin-bottom: 12px; color: #fff; font-weight: 600;">What's included:</div>
+              <ul role="list" class="plan-feature-list" style="display: grid; gap: 10px;">
+                <li><div class="plan-feature">Full access to gym floor with Fitline machinery</div></li>
+                <li><div class="plan-feature">Modern smith machines, cable crossovers &amp; free weights</div></li>
+                <li><div class="plan-feature">Attentive workout guidance &amp; trainer support</div></li>
                 <li><div class="plan-feature">Clean, hygienic, and spacious training atmosphere</div></li>
-                <li><div class="plan-feature">Locker &amp; changing area access included</div></li>
-                <li><div class="plan-feature">Complete value for money — Bhagalpur’s top rated gym</div></li>
+                <li><div class="plan-feature">Lockers &amp; changing area access included</div></li>
               </ul>
             </div>
 
-            <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px;">
+            <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px;">
               <div style="display: flex; gap: 2px; color: var(--_colors---brand-primary);">
-                <svg width="18" height="18" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
-                <svg width="18" height="18" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
-                <svg width="18" height="18" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
-                <svg width="18" height="18" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
-                <svg width="18" height="18" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 1024 1024" fill="currentColor"><path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3z"/></svg>
               </div>
               <span style="color: #aaa; font-size: 13px;">5.0 ★ (49 Google Reviews)</span>
             </div>
           </div>
 
           <!-- RIGHT: REGISTRATION FORM CARD -->
-          <div class="reg-form-card">
-            <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1.5px;color:#ffffff;line-height:1;margin-bottom:8px;">REGISTRATION FORM</h3>
-            <p style="color:#aaa;font-size:14px;margin-bottom:28px;">Fill in your details below to register. Our team will verify your information and contact you to confirm your admission.</p>
+          <div class="reg-form-card" id="membership-form">
+            <h3 style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1.5px;color:#ffffff;line-height:1;margin-bottom:6px;">REGISTRATION FORM</h3>
+            <p style="color:#aaa;font-size:14px;margin-bottom:20px;">Select your package and fill in your details below. Direct confirmation via WhatsApp.</p>
 
             <div class="contact-form w-form">
               <form id="reg-form" onsubmit="handleRegistration(event)">
                 
+                <!-- SELECT PACKAGE -->
+                <label class="form-label" style="display:block;margin-bottom:8px;font-weight:600;">Choose Membership Package*</label>
+                <div class="plan-select-grid">
+                  <!-- Option 1: Basic -->
+                  <div class="plan-option-card" data-plan-id="basic" onclick="selectPlan('basic')">
+                    <div class="plan-option-header">
+                      <span class="plan-option-title">BASIC</span>
+                      <span class="plan-option-duration">1 Month</span>
+                    </div>
+                    <div class="plan-option-price">₹1,300/-</div>
+                  </div>
+
+                  <!-- Option 2: Standard -->
+                  <div class="plan-option-card" data-plan-id="standard" onclick="selectPlan('standard')">
+                    <div class="plan-option-header">
+                      <span class="plan-option-title">STANDARD</span>
+                      <span class="plan-option-duration">3 Months</span>
+                    </div>
+                    <div class="plan-option-price">₹3,000/-</div>
+                  </div>
+
+                  <!-- Option 3: Premium -->
+                  <div class="plan-option-card" data-plan-id="premium" onclick="selectPlan('premium')">
+                    <div class="plan-option-header">
+                      <span class="plan-option-title">PREMIUM</span>
+                      <span class="plan-option-badge">Gifts</span>
+                    </div>
+                    <div class="plan-option-price">₹6,000/-</div>
+                    <div class="plan-option-duration">6 Months</div>
+                    <div class="plan-option-gift">+ Bag, Shaker, Creatine</div>
+                  </div>
+
+                  <!-- Option 4: Ultimate -->
+                  <div class="plan-option-card selected" data-plan-id="ultimate" onclick="selectPlan('ultimate')">
+                    <div class="plan-option-header">
+                      <span class="plan-option-title">ULTIMATE</span>
+                      <span class="plan-option-badge" style="background:#fff;color:#000;">Best</span>
+                    </div>
+                    <div class="plan-option-price">₹10,000/-</div>
+                    <div class="plan-option-duration">12 Months</div>
+                    <div class="plan-option-gift">+ 4 Free Gifts Combo</div>
+                  </div>
+                </div>
+
+                <input type="hidden" name="plan" id="reg-plan" value="Ultimate Package (12 Months - Rs.10,000)"/>
+
                 <label for="reg-name" class="form-label">Full Name*</label>
                 <input class="text-field w-input" maxlength="256" name="name" placeholder="Enter your full name" type="text" id="reg-name" required=""/>
 
@@ -329,23 +451,20 @@
                 <input class="text-field w-input" maxlength="256" name="phone" placeholder="Enter your 10-digit mobile number" type="tel" id="reg-phone" required=""/>
 
                 <label for="reg-address" class="form-label">Address / Locality*</label>
-                <input class="text-field w-input" maxlength="256" name="address" placeholder="e.g. Laluchak Bhatta Rd, Angari, Bhagalpur" type="text" id="reg-address" required=""/>
+                <input class="text-field w-input" maxlength="256" name="address" placeholder="e.g. Laluchak Bhatta Rd, Near Kali Mandir, Bhagalpur" type="text" id="reg-address" required=""/>
 
                 <label for="reg-email" class="form-label">Email Address (Optional)</label>
                 <input class="text-field w-input" maxlength="256" name="email" placeholder="Enter your email address" type="email" id="reg-email"/>
 
-                <label class="form-label" style="display:block;margin-bottom:10px;">Selected Plan</label>
-                <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(212,255,0,0.35);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
-                  <span style="font-weight:600;font-size:16px;color:#ffffff;letter-spacing:0.3px;">Annual Membership</span>
-                  <span style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--_colors---brand-primary);letter-spacing:1.5px;line-height:1;">₹4,500 / YEAR</span>
-                </div>
-                <input type="hidden" name="plan" id="reg-plan" value="Annual Membership — ₹4,500 / Year"/>
-
                 <label for="reg-message" class="form-label">Fitness Goals / Remarks (Optional)</label>
-                <textarea id="reg-message" name="message" maxlength="2000" placeholder="Tell us your goals (strength, fat loss, general fitness) or any questions" class="text-field w-input" style="min-height:70px;"></textarea>
+                <textarea id="reg-message" name="message" maxlength="2000" placeholder="Tell us your goals (strength, muscle gain, fat loss) or questions" class="text-field w-input" style="min-height:60px;"></textarea>
 
-                <div class="form-button-wrapper" style="margin-top:20px;">
-                  <div style="font-size:13px;color:#aaa;">We’ll contact you shortly</div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;margin-bottom:18px;font-size:12px;color:#aaa;line-height:1.4;">
+                  💡 <strong>Note:</strong> Registration fee is ₹500 (one-time). Free gifts valid on one-time full payment of 6 &amp; 12 months packages.
+                </div>
+
+                <div class="form-button-wrapper" style="margin-top:16px;">
+                  <div style="font-size:13px;color:#aaa;">Direct WhatsApp connect</div>
                   <button type="submit" id="reg-submit-btn" class="button primary w-button" style="cursor:pointer;border:none;">
                     <div class="button-inner"><div class="button-text">Register Now</div></div>
                   </button>
@@ -418,12 +537,103 @@
   <script src="js/webflow-script.js" type="text/javascript"></script>
   
   <script>
+    var plansData = {
+      'basic': {
+        name: 'Basic Package',
+        duration: 'Duration: 1 Month',
+        price: '₹1,300',
+        subs: '/-',
+        tag: '⚡ Starter Package',
+        gifts: null,
+        desc: 'Ideal for beginners starting their fitness journey. Full access to all Fitline strength equipment, cardio zone, and floor guidance on Laluchak Bhatta Road.',
+        waName: 'Basic Package (1 Month - Rs.1,300)'
+      },
+      'standard': {
+        name: 'Standard Package',
+        duration: 'Duration: 3 Months',
+        price: '₹3,000',
+        subs: '/-',
+        tag: '📈 Popular Quarterly',
+        gifts: null,
+        desc: 'Cost-saving 3-month membership with full facility access, workout progression routines, and dedicated form guidance from Coach Anshu.',
+        waName: 'Standard Package (3 Months - Rs.3,000)'
+      },
+      'premium': {
+        name: 'Premium Package',
+        duration: 'Duration: 6 Months',
+        price: '₹6,000',
+        subs: '/-',
+        tag: '🎁 Free Gifts Offer',
+        gifts: 'Leather Gym Bag + Shaker + Creatine',
+        desc: 'Half-year dedicated transformation program. Pay full in advance to claim FREE Leather Gym Bag, Shaker, and Creatine combo from Prem Fitness Gym.',
+        waName: 'Premium Package (6 Months - Rs.6,000 + Free Gifts)'
+      },
+      'ultimate': {
+        name: 'Ultimate Package',
+        duration: 'Duration: 12 Months',
+        price: '₹10,000',
+        subs: '/-',
+        tag: '🔥 Best Value + 4 Gifts',
+        gifts: 'Leather Gym Bag + Shaker + Creatine + Peanut Butter',
+        desc: 'Full 365-day membership with unlimited access to all gym facilities and Fitline strength machinery. Includes 4 Free Gifts on one-time full payment.',
+        waName: 'Ultimate Package (12 Months - Rs.10,000 + 4 Free Gifts)'
+      }
+    };
+
+    var currentPlanKey = 'ultimate';
+
+    function selectPlan(planKey) {
+      if (!plansData[planKey]) planKey = 'ultimate';
+      currentPlanKey = planKey;
+      var data = plansData[planKey];
+
+      // Update option card visual selection
+      document.querySelectorAll('.plan-option-card').forEach(function(card) {
+        if (card.getAttribute('data-plan-id') === planKey) {
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
+        }
+      });
+
+      // Update left summary card
+      document.getElementById('summary-tag').textContent = data.tag;
+      document.getElementById('summary-name').textContent = data.name;
+      document.getElementById('summary-duration').textContent = data.duration;
+      document.getElementById('summary-price').innerHTML = data.price + '<span class="plan-subs" style="font-size: 18px; color: #888;"> ' + data.subs + '</span>';
+      document.getElementById('summary-desc').textContent = data.desc;
+
+      // Update gifts box
+      var giftsBox = document.getElementById('summary-gifts-box');
+      if (data.gifts) {
+        giftsBox.style.display = 'block';
+        document.getElementById('summary-gifts-text').textContent = data.gifts;
+      } else {
+        giftsBox.style.display = 'none';
+      }
+
+      // Update hidden input
+      document.getElementById('reg-plan').value = data.waName;
+    }
+
+    // Check URL parameters on load
+    window.addEventListener('DOMContentLoaded', function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var p = urlParams.get('plan');
+      if (p && plansData[p]) {
+        selectPlan(p);
+      } else {
+        selectPlan('ultimate');
+      }
+    });
+
     function handleRegistration(e) {
       e.preventDefault();
       var name    = document.getElementById('reg-name').value.trim();
       var phone   = document.getElementById('reg-phone').value.trim();
       var address = document.getElementById('reg-address').value.trim();
       var email   = document.getElementById('reg-email').value.trim();
+      var plan    = document.getElementById('reg-plan').value;
 
       if (!name || !phone || !address) {
         alert('Please fill in all required fields.');
@@ -435,7 +645,8 @@
               + 'My phone number is ' + phone + '.\n'
               + (email ? 'My email is ' + email + '.\n' : '')
               + 'I am from ' + address + '.\n'
-              + 'I want to join Prem Fitness Gym, Bhagalpur (Annual Membership - Rs.4,500/year).\n'
+              + 'I want to join Prem Fitness Gym, Bhagalpur.\n'
+              + 'Selected Package: ' + plan + ' (+ Rs.500 Registration Fee).\n'
               + 'Please confirm my registration.';
 
       var waUrl = 'https://wa.me/918051647464?text=' + encodeURIComponent(msg);
@@ -527,8 +738,8 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12"></path><path d="M6 8h12"></path><path d="M6 13l8.5 8"></path><path d="M6 13h3a4 4 0 0 0 0-8"></path></svg>
           </div>
           <div class="why-item-content">
-            <h4>Unbeatable ₹4,500/Year Value</h4>
-            <p>Full 365-day all-inclusive membership at under ₹375/month — Bhagalpur's most cost-effective gym experience.</p>
+            <h4>Flexible Packages &amp; Free Gifts</h4>
+            <p>From 1-month trial to 12-month transformation. Get free gym bag, shaker, creatine &amp; peanut butter on 6M &amp; 12M packages.</p>
           </div>
         </div>
       </div>
