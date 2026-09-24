@@ -108,7 +108,7 @@ Discoverable training categories structured around actual equipment and faciliti
 ### ◉ Verified Trainers
 Trainers are presented strictly using authentic, publicly verifiable records:
 - **Coach Anshu** (`@justin_anshu`) — Head Trainer & Workout Coach
-- **Prem Aryan** — Founder & Director
+- **Prem Aryan** — Owner & Director
 - Direct WhatsApp & Instagram links for direct personal training consultations.
 
 ---
