@@ -369,3 +369,7 @@ This project is built around verifiable ground truth:
   <i>Discipline • Strength • Progress</i><br/><br/>
   <sub>© 2026 Prem Fitness Gym. All rights reserved.</sub>
 </div>
+
+---
+
+Built by [Mohit Raj](https://github.com/mohitraj8503) — Technical Team Lead @ [Tech Tomorrow](https://techtomorrow.in)
